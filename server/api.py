@@ -6,10 +6,6 @@ import base64
 import json
 import traceback
 import os
-from dotenv import load_dotenv
-
-# Load .env variables
-load_dotenv()
 
 app = FastAPI()
 
