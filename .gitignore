@@ -1,0 +1,72 @@
+# -------------------------
+# Node / Vite / React
+# -------------------------
+node_modules/
+dist/
+build/
+.cache/
+.vite/
+*.local
+
+/server/.env
+
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Vite output
+*.vite.svg
+
+# -------------------------
+# Python / FastAPI Backend
+# -------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+.eggs/
+
+# Virtual environment folders
+venv/
+.venv/
+ENV/
+env/
+env.bak/
+
+# Uvicorn logs
+uvicorn.log
+
+# -------------------------
+# OS / Editor Files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm / JetBrains
+.idea/
+
+# -------------------------
+# Images / Cache / Temp
+# -------------------------
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Uploaded images (optional)
+uploads/
+server/uploads/
