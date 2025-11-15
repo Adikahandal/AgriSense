@@ -8,7 +8,7 @@ build/
 .vite/
 *.local
 
-/server/.env
+.env
 
 
 # Logs

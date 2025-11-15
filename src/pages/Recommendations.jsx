@@ -11,9 +11,11 @@ export default function Recommendations() {
 
   if (!data) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#052e1f] to-[#0b3f2b] pt-28 px-6 flex items-center justify-center text-white">
-        <div className="max-w-xl text-center glass-card p-8 rounded-2xl">
-          <p className="text-lg text-white/80">No analysis found. Please analyze a leaf first.</p>
+      <div className="min-h-screen bg-gradient-to-b from-[#10241c] to-[#0b3f2b] flex items-center justify-center text-white px-6">
+        <div className="bg-white/10 p-8 rounded-3xl backdrop-blur-xl border border-white/10 shadow-lg max-w-lg text-center">
+          <p className="text-lg text-white/80">
+            No analysis found. Please upload and analyze a leaf image first.
+          </p>
         </div>
       </div>
     );
@@ -22,45 +24,99 @@ export default function Recommendations() {
   const details = data.details || {};
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0c1117] via-[#0f2633] to-[#103b29] pt-28 pb-16 px-6 text-white">
-      <div className="max-w-4xl mx-auto">
-        <motion.h1 initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="text-4xl font-extrabold mb-4">{data.label}</motion.h1>
-        <p className="text-emerald-300 mb-6">Confidence: <strong className="text-white">{(data.confidence * 100).toFixed(2)}%</strong></p>
+    <div className="min-h-screen bg-gradient-to-b from-[#0a171f] via-[#0c232f] to-[#0e3b2c] pt-28 pb-16 px-6 text-white">
+      <div className="max-w-5xl mx-auto">
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-white/5 p-6 rounded-xl border border-white/8">
-            <h3 className="text-lg font-semibold text-emerald-200 mb-2">Cause</h3>
-            <p className="text-white/90">{details.cause ?? "AI-generated cause not available."}</p>
+        <motion.h1
+          initial={{ y: 15, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-5xl font-extrabold mb-3 tracking-wide"
+        >
+          {data.label}
+        </motion.h1>
+
+        <p className="text-emerald-300 text-lg mb-10">
+          Confidence:{" "}
+          <strong className="text-white">
+            {(data.confidence * 100).toFixed(2)}%
+          </strong>
+        </p>
+
+        {/* GRID SECTIONS */}
+        <div className="grid md:grid-cols-2 gap-8">
+
+          {/* Cause */}
+          <div className="bg-white/10 p-6 rounded-2xl border border-white/10 shadow-xl backdrop-blur-xl">
+            <h3 className="text-xl font-semibold text-emerald-300 mb-2">
+              Cause
+            </h3>
+            <p className="text-white/90 text-sm leading-relaxed">
+              {details.cause ?? "AI could not determine a specific cause."}
+            </p>
           </div>
 
-          <div className="bg-white/5 p-6 rounded-xl border border-white/8">
-            <h3 className="text-lg font-semibold text-emerald-200 mb-2">Symptoms</h3>
-            <p className="text-white/90">{Array.isArray(details.symptoms) ? details.symptoms.join(", ") : (details.symptoms ?? "No symptom data")}</p>
+          {/* Symptoms */}
+          <div className="bg-white/10 p-6 rounded-2xl border border-white/10 shadow-xl backdrop-blur-xl">
+            <h3 className="text-xl font-semibold text-emerald-300 mb-2">
+              Symptoms
+            </h3>
+            <p className="text-white/90 text-sm">
+              {Array.isArray(details.symptoms)
+                ? details.symptoms.join(", ")
+                : details.symptoms ?? "No symptom data available."}
+            </p>
           </div>
 
-          <div className="bg-white/5 p-6 rounded-xl border border-white/8">
-            <h3 className="text-lg font-semibold text-emerald-200 mb-2">Treatment</h3>
-            <ul className="list-disc ml-5 text-white/90">
-              {Array.isArray(details.treatment) ? details.treatment.map((t, i) => <li key={i}>{t}</li>) : <li>{details.treatment ?? "General: maintain water, nutrients, check local extension services."}</li>}
+          {/* Treatment */}
+          <div className="bg-white/10 p-6 rounded-2xl border border-white/10 shadow-xl backdrop-blur-xl">
+            <h3 className="text-xl font-semibold text-emerald-300 mb-2">
+              Treatment
+            </h3>
+            <ul className="list-disc ml-5 text-white/90 text-sm leading-relaxed">
+              {Array.isArray(details.treatment)
+                ? details.treatment.map((t, i) => <li key={i}>{t}</li>)
+                : <li>{details.treatment ?? "General: Apply fungicide, remove infected leaves, improve airflow."}</li>}
             </ul>
           </div>
 
-          <div className="bg-white/5 p-6 rounded-xl border border-white/8">
-            <h3 className="text-lg font-semibold text-emerald-200 mb-2">Prevention</h3>
-            <ul className="list-disc ml-5 text-white/90">
-              {Array.isArray(details.prevention) ? details.prevention.map((p, i) => <li key={i}>{p}</li>) : <li>{details.prevention ?? "Practice crop rotation and sanitation."}</li>}
+          {/* Prevention */}
+          <div className="bg-white/10 p-6 rounded-2xl border border-white/10 shadow-xl backdrop-blur-xl">
+            <h3 className="text-xl font-semibold text-emerald-300 mb-2">
+              Prevention
+            </h3>
+            <ul className="list-disc ml-5 text-white/90 text-sm leading-relaxed">
+              {Array.isArray(details.prevention)
+                ? details.prevention.map((p, i) => <li key={i}>{p}</li>)
+                : <li>{details.prevention ?? "General: Maintain soil health, avoid overhead irrigation, rotate crops."}</li>}
             </ul>
           </div>
         </div>
 
-        <div className="mt-6 p-6 rounded-xl bg-white/6 border border-white/8">
-          <h3 className="text-lg font-semibold text-emerald-200 mb-2">AI Quick Recommendation</h3>
-          <p className="text-white/90">{data.recommendation ?? "No recommendation available."}</p>
+        {/* AI QUICK ADVICE */}
+        <div className="mt-10 bg-white/10 border border-white/10 p-6 rounded-2xl backdrop-blur-xl shadow-xl">
+          <h3 className="text-xl font-semibold text-emerald-300 mb-3">
+            AI Quick Recommendation
+          </h3>
+          <p className="text-white/90 leading-relaxed">
+            {data.recommendation ?? "No recommendation available."}
+          </p>
         </div>
 
-        <div className="mt-6 flex gap-3">
-          <button onClick={() => window.history.back()} className="px-4 py-2 rounded-lg bg-white/7 border border-white/10 text-white">Back</button>
-          <button onClick={() => navigator.clipboard.writeText(JSON.stringify(data))} className="px-4 py-2 rounded-lg bg-emerald-400 text-black font-semibold">Copy Report</button>
+        {/* Buttons */}
+        <div className="mt-10 flex gap-4">
+          <button
+            onClick={() => window.history.back()}
+            className="px-5 py-3 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/20 transition"
+          >
+            Back
+          </button>
+
+          <button
+            onClick={() => navigator.clipboard.writeText(JSON.stringify(data))}
+            className="px-5 py-3 rounded-xl bg-emerald-400 text-black font-semibold hover:scale-[1.02] transition"
+          >
+            Copy Report
+          </button>
         </div>
       </div>
     </div>
